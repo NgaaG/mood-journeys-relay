@@ -1,9 +1,8 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqmt3SyidND_gTaBINfErwGCsUvN6V6rr5oVFrNTRzJx-5B_PnCgj0gbI0zRPvDH79Eg/exec';
 
-export default async function handler(req, res) {
-  // CORS headers
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,37 +17,27 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
   try {
     const journeyData = req.body;
-
-    console.log('📥 Received journey:', journeyData.id);
-
-    // Forward to Google Apps Script
     const response = await axios.post(APPS_SCRIPT_URL, journeyData, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      timeout: 10000
+      headers: { 'Content-Type': 'application/json' }, timeout: 10000
     });
 
-    console.log('✅ Journey forwarded to Google Sheets');
-
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: 'Journey saved to Google Sheets',
       timestamp: new Date().toISOString(),
       journeyId: journeyData.id
     });
-
   } catch (error) {
-    console.error('❌ Error:', error.message);
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       error: error.message,
       timestamp: new Date().toISOString()
     });
   }
-}
+};
