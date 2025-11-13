@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mood Journeys Relay for Vercel - forwards to Google Sheets",
   "engines": {
-    "node": "18.x"
+  "node": "22.x"
   },
   "scripts": {
     "dev": "vercel dev"
