@@ -1,0 +1,14 @@
+{
+  "name": "mood-journeys-relay",
+  "version": "1.0.0",
+  "description": "Mood Journeys Relay for Vercel - forwards to Google Sheets",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
+  }
+}
