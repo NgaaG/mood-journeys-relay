@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_EXEC_URL_HERE";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_jq59RWh7WwZO0sIqgLB_7ppnEGo3acdjoNJtb7srYxKSTHJTrb9FGasdWAtYgU9hPA/exec";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
